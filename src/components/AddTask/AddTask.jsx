@@ -1,42 +1,36 @@
 import React, { useState } from "react";
-import styles from "./addTask.module.css";
-import Task from "../Task/Task";
-// import { useState } from "react";
+import styles from "./counter.module.css";
 
-
-
+const Counter = () => {
+  const [counter, setCounter] = useState(0);
+  // sample value to be replaced
+  // let count = 0;
   // NOTE: do not delete `data-cy` key value pair
-  //  const [isCompleted, setIsCompleted] = useState(task.isCompleted);
-  const AddTask = () => {
-    const [query, setQuery] = useState("uttam")
-    const [todo, setTodo] = useState([])
-
-
-    const onDelete = (id) => {
-      let newTodo = todo.filter(item => item.id !== id)
-      setTodo(newTodo)
-    
-  }
   return (
-    <div className={styles.todoForm}>
-      <input data-cy='add-task-input' type='text' onChange={(e)=>setQuery(e.target.value)} />
-      <button data-cy='add-task-button' onClick={() => {
-        if (query) {
-          setTodo([...todo, { id: Date.now(), value: query }]);
-          setQuery("")
-        }
-      }}>add</button>
-
-      {todo.map((item) => 
-        
-      
-       return(
-        <Task key={item.id} item={item} onDelete={onDelete}/>
-      ))}
+    <div className={styles.counter}>
+      <button
+        data-cy='task-counter-increment-button'
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        +
+      </button>
+      <span className={styles.span} data-cy='task-counter-value'>
+        {counter}
+      </span>
+      <button
+        data-cy='task-counter-decrement-button'
+        onClick={() => {
+          if (counter > 0) {
+            setCounter(counter - 1);
+          }
+        }}
+      >
+        -
+      </button>
     </div>
   );
-};;
+};
 
-export default AddTask;
-
-
+export default Counter;
